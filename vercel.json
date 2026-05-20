@@ -1,0 +1,9 @@
+{
+  "name": "badamsudheerreddy-mart",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
