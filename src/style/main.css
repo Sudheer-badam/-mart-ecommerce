@@ -802,3 +802,48 @@ hr {
   margin-top: 1rem;
   font-weight: 600;
 }
+
+/* ─── Global Site Footer with FSSAI Badge ─── */
+.site-footer {
+  width: 100%;
+  border-top: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  padding: 1.5rem 2rem;
+  margin-top: auto;
+}
+
+.site-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.site-footer-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.site-footer-fssai {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.site-footer-fssai:hover {
+  opacity: 1;
+}
+
+.site-footer-copy {
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  font-weight: 400;
+}
+

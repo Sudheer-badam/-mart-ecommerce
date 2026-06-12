@@ -1,0 +1,355 @@
+/* Intro Screen Stylesheet */
+
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #ff0000, #ff7700, #ffff00, #00cc00, #0000ff, #8b00ff, #ff0000
+  );
+  background-size: 400% 400%;
+  animation: rainbow-shift 6s linear infinite, opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  overflow: hidden;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes rainbow-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.intro-overlay.fade-out {
+  opacity: 0;
+  transform: scale(1.05);
+  pointer-events: none;
+}
+
+/* Background particle elements for rich parallax depth */
+.intro-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  mix-blend-mode: screen;
+}
+
+.particle.p1 {
+  width: 350px;
+  height: 350px;
+  background: #c7d2fe;
+  top: 10%;
+  left: 15%;
+  opacity: 0.35;
+  animation: float-slow 20s infinite alternate;
+}
+
+.particle.p2 {
+  width: 400px;
+  height: 400px;
+  background: #ddd6fe;
+  bottom: 15%;
+  right: 10%;
+  opacity: 0.3;
+  animation: float-slow 25s infinite alternate-reverse;
+}
+
+.particle.p3 {
+  width: 300px;
+  height: 300px;
+  background: #fde68a;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.2;
+  animation: pulse-glow 8s infinite alternate;
+}
+
+@keyframes float-slow {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(40px) scale(1.1); }
+}
+
+@keyframes pulse-glow {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.06; }
+  100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.12; }
+}
+
+/* Core Content Container */
+.intro-content {
+  text-align: center;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo Animating & Glowing Container */
+.logo-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff0f1; /* Beautiful light pink/white background to match the logo image */
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  border: 3px solid #6366f1;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: scale(0.6) rotate(-10deg);
+  animation: logo-entrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.intro-logo {
+  width: 170px;
+  height: auto;
+  display: block;
+  border-radius: 0;
+  object-fit: contain;
+}
+
+.logo-glow {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #6366f1, #a855f7, #f59e0b);
+  filter: blur(15px);
+  opacity: 0.25;
+  z-index: -1;
+  transform: scale(1.02);
+  animation: logo-glow-rotate 10s linear infinite;
+}
+
+@keyframes logo-entrance {
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes logo-glow-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Brand name letter by letter typing effect */
+.intro-brand {
+  font-size: 3.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.intro-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  filter: blur(5px);
+  animation: letter-reveal 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  /* Start letter animations after logo settles (1s delay baseline) */
+  animation-delay: calc(1s + var(--index) * 0.22s);
+}
+
+@keyframes letter-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Subtitle animate in */
+.intro-subtitle {
+  font-size: 0.95rem;
+  letter-spacing: 0.5em;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.25);
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: subtitle-reveal 0.8s ease-out forwards;
+  animation-delay: 3.6s;
+}
+
+@keyframes subtitle-reveal {
+  to {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+}
+
+/* Dot loading indicator */
+.dot-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: subtitle-reveal 0.6s ease-out forwards;
+  animation-delay: 3.8s;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+  animation: dot-bounce 1.4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.18s);
+}
+
+@keyframes dot-bounce {
+  0%, 80%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-10px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Skip Intro button */
+.skip-btn {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+  z-index: 20;
+  opacity: 0;
+  animation: skip-fade-in 0.5s ease-out forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes skip-fade-in {
+  to { opacity: 1; }
+}
+
+.skip-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.8);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.skip-btn:active {
+  transform: translateY(0);
+}
+
+.skip-icon {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.skip-btn:hover .skip-icon {
+  transform: translateX(2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .intro-brand {
+    font-size: 2.25rem;
+  }
+  .intro-logo {
+    width: 130px;
+  }
+  .logo-wrapper {
+    padding: 0.75rem 1.25rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+  }
+  .logo-glow {
+    border-radius: 20px;
+  }
+  .skip-btn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  .intro-fssai-badge {
+    bottom: 1.5rem;
+  }
+  .intro-fssai-img {
+    height: 70px;
+  }
+}
+
+/* ─── FSSAI Badge on Intro Screen ─── */
+.intro-fssai-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 0.85rem 2rem;
+  border-radius: 16px;
+  opacity: 0;
+  animation: skip-fade-in 0.6s ease-out forwards;
+  animation-delay: 4.2s;
+}
+
+.intro-fssai-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.intro-fssai-img {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
+}
+

@@ -35,7 +35,7 @@ const Navbar = () =>{
         <nav className="navbar">
             <div className="navbar-brand">
                 <NavLink to="/" className="navbar-logo-container">
-                    <img src="./BADAMSUDHEERREDDY.jpg" alt="Sudheer Mart" className="navbar-circle-logo" />
+                    <img src="./logo-new.png" alt="Sudheer Mart" className="navbar-circle-logo" />
                     <span className="navbar-brand-name">Sudheer Mart</span>
                 </NavLink>
             </div>
@@ -51,6 +51,7 @@ const Navbar = () =>{
             <div className="navbar-link">
                 <NavLink to="/" >Home</NavLink>
                 <NavLink to="/categories" >Categories</NavLink>
+                <NavLink to="/support">Support</NavLink>
                 {isAuthenticated && <NavLink to="/profile" >My Account</NavLink>}
                 {isAdmin && <NavLink to="/admin" >Admin</NavLink>}
                 {!isAuthenticated && <NavLink to="/login" >Login</NavLink>}
