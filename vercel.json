@@ -1,13 +1,7 @@
 {
   "name": "badamsudheerreddy-mart",
-  "rewrites": [
-    {
-      "source": "/google82756c4cc294e892.html",
-      "destination": "/google82756c4cc294e892.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
