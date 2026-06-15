@@ -1,4 +1,6 @@
 const { Jimp } = require('jimp');
+const fs = require('fs');
+const path = require('path');
 
 async function makeCircle() {
   // 1. Read the original logo
@@ -18,9 +20,23 @@ async function makeCircle() {
   // 5. Apply the circle mask to make it circular
   background.circle();
   
-  // 6. Write it to the public directory
+  // 6. Write it to the public directory in various sizes
   await background.write('public/favicon-circle.png');
-  console.log('Created circular favicon successfully!');
+  console.log('Created circular favicon-circle.png successfully!');
+  
+  // Overwrite favicon.ico by copying the png file (browsers and crawlers accept PNG named as .ico)
+  fs.copyFileSync('public/favicon-circle.png', 'public/favicon.ico');
+  console.log('Created circular favicon.ico successfully!');
+
+  // Overwrite logo512.png
+  await background.write('public/logo512.png');
+  console.log('Created circular logo512.png successfully!');
+
+  // Resize to 192x192 and write to logo192.png
+  const logo192 = background.clone();
+  logo192.resize({ w: 192, h: 192 });
+  await logo192.write('public/logo192.png');
+  console.log('Created circular logo192.png successfully!');
 }
 
 makeCircle().catch(console.error);
