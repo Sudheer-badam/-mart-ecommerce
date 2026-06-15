@@ -19,17 +19,21 @@
 }
 
 .navbar-circle-logo {
-  width: 42px;
-  height: 42px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #6366f1; /* Premium border ring */
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+  object-fit: contain;        /* Shows the full logo without cropping */
+  background-color: #fff0f1;  /* Matches the logo's light pink background */
+  padding: 4px;               /* Slight inner padding so logo breathes inside the circle */
+  border: 2.5px solid #6366f1; /* Premium border ring */
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.2); /* Subtle outer glow */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar-logo-container:hover .navbar-circle-logo {
   transform: rotate(5deg) scale(1.08);
   border-color: #f59e0b; /* Turns gold on hover */
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
 }
 
 .navbar-brand-name {
